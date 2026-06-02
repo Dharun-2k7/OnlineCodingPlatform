@@ -92,16 +92,41 @@ document.addEventListener('DOMContentLoaded', () => {
                 const data = await response.json();
 
                 if (response.ok) {
-                    showStatus(`Submission Queued! ID: ${data.submission_id}. Waiting for execution...`, 'success');
-                    // In Phase 2, we will add polling here to check if the background worker finished running it
+                    showStatus(`Submission Queued! ID: ${data.submission_id}. Waiting for execution...`, 'pending');
+                    
+                    // Poll for status
+                    const pollInterval = setInterval(async () => {
+                        try {
+                            const statusRes = await fetch(`http://localhost:8080/api/submissions/${data.submission_id}`);
+                            if (statusRes.ok) {
+                                const statusData = await statusRes.json();
+                                if (statusData.status !== 'PENDING') {
+                                    clearInterval(pollInterval);
+                                    let statusType = statusData.status === 'ACCEPTED' ? 'success' : 'error';
+                                    showStatus(`Submission ${statusData.status}! (Time: ${statusData.execution_time_ms || 0}ms)`, statusType);
+                                    submitBtn.disabled = false;
+                                    submitBtn.textContent = 'Submit Code';
+                                }
+                            }
+                        } catch (e) {
+                            clearInterval(pollInterval);
+                            showStatus('Error checking status.', 'error');
+                            submitBtn.disabled = false;
+                            submitBtn.textContent = 'Submit Code';
+                        }
+                    }, 1000);
+                    return; // Don't re-enable button yet
                 } else {
                     showStatus(`Error: ${data.error}`, 'error');
                 }
             } catch (err) {
                 showStatus('Failed to connect to backend server. Is it running on :8080?', 'error');
             } finally {
-                submitBtn.disabled = false;
-                submitBtn.textContent = 'Submit Code';
+                // If it didn't return early due to polling, re-enable
+                if (submitBtn.textContent !== 'Processing...') {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Submit Code';
+                }
             }
         });
 

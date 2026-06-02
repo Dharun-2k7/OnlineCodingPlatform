@@ -72,8 +72,8 @@ func RunSecurely(code, language, input string) (*SandboxResult, error) {
 	}
 	dockerArgs = append(dockerArgs, runCmd...)
 
-	// 4. Setup Execution with Timeout (2.0 seconds)
-	ctx, cancel := context.WithTimeout(context.Background(), 2*time.Second)
+	// 4. Setup Execution with Timeout (5.0 seconds)
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 
 	cmd := exec.CommandContext(ctx, "docker", dockerArgs...)
@@ -94,7 +94,7 @@ func RunSecurely(code, language, input string) (*SandboxResult, error) {
 	if ctx.Err() == context.DeadlineExceeded {
 		return &SandboxResult{
 			Stdout:       stdout.String(),
-			Stderr:       "Execution killed: Time Limit Exceeded (2.0s)",
+			Stderr:       "Execution killed: Time Limit Exceeded (5.0s)",
 			TimeExceeded: true,
 		}, nil
 	}

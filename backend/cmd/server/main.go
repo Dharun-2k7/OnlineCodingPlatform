@@ -38,6 +38,7 @@ func main() {
 	r.GET("/health", api.HealthCheck)
 	r.POST("/api/submit", api.SubmitCode)
 	r.POST("/api/run", api.RunCode)
+	r.GET("/api/submissions/:id", api.GetSubmissionStatus)
 
 	// Start Server
 	log.Println("Starting server on :8080")

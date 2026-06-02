@@ -99,3 +99,25 @@ func RunCode(c *gin.Context) {
 		"stderr": res.Stderr,
 	})
 }
+
+// GetSubmissionStatus handles polling for submission results
+func GetSubmissionStatus(c *gin.Context) {
+	id := c.Param("id")
+	var status string
+	var executionTimeMs *int
+	var byteCount *int
+
+	query := `SELECT status, execution_time_ms, byte_count FROM submissions WHERE id = $1`
+	err := db.DB.QueryRow(query, id).Scan(&status, &executionTimeMs, &byteCount)
+	
+	if err != nil {
+		c.JSON(http.StatusNotFound, gin.H{"error": "Submission not found"})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"status": status,
+		"execution_time_ms": executionTimeMs,
+		"byte_count": byteCount,
+	})
+}
