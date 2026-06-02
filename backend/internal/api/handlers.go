@@ -63,3 +63,28 @@ func SubmitCode(c *gin.Context) {
 		"status":        "PENDING",
 	})
 }
+
+// RunRequest defines the payload for testing code against custom input
+type RunRequest struct {
+	Code     string `json:"code" binding:"required"`
+	Language string `json:"language" binding:"required"`
+	Input    string `json:"input"`
+}
+
+// RunCode handles executing code against custom input without saving it to the database
+func RunCode(c *gin.Context) {
+	var req RunRequest
+	if err := c.ShouldBindJSON(&req); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid request payload"})
+		return
+	}
+
+	// TODO: Phase 2 - Send to High Priority Redis Queue or execute directly via a secure Docker container
+	// For now, return a mock response so the UI works
+	mockOutput := "Executed in Sandbox (Mock).\n\nReceived Input:\n" + req.Input
+	
+	c.JSON(http.StatusOK, gin.H{
+		"output": mockOutput,
+		"stderr": "",
+	})
+}

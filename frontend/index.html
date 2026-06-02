@@ -3,60 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Niche CP - Reverse & Golf</title>
+    <title>Amrita Nagercoil ICPC Club</title>
     <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
 </head>
-<body>
-    <div class="glow-bg"></div>
-    <nav class="navbar">
-        <div class="logo">Niche<span>CP</span></div>
-        <div class="nav-links">
-            <a href="#" class="active">Arena</a>
-            <a href="#">Leaderboard</a>
-            <a href="#">Profile</a>
+<body class="home-body">
+    <!-- Cyber Grid Background -->
+    <div class="cyber-grid"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar landing-nav">
+        <div class="landing-logo">
+            <span class="amrita">AMRITA</span> <span class="divider">/</span> <span class="icpc">ICPC_CLUB</span>
         </div>
+        <div class="nav-links">
+            <a href="#">Home</a>
+            <a href="#about">About</a>
+            <a href="#archives">Archives</a>
+            <a href="#upcoming">Contests</a>
+        </div>
+        <a href="arena.html" class="btn-neon">Initialize_Arena</a>
     </nav>
-    <main class="container">
-        <header class="hero">
-            <h1>Reverse Coding <span>Duel</span></h1>
-            <p>Guess the hidden logic. Write the code. Defeat the judge.</p>
-        </header>
 
-        <section class="problem-arena">
-            <div class="problem-statement glass-panel">
-                <h2>Problem: The Hidden Sequence</h2>
-                <div class="test-cases">
-                    <div class="case">
-                        <span class="label">Input:</span> <span class="code-val">5</span>
-                        <br>
-                        <span class="label">Output:</span> <span class="code-val">120</span>
-                    </div>
-                    <div class="case">
-                        <span class="label">Input:</span> <span class="code-val">3</span>
-                        <br>
-                        <span class="label">Output:</span> <span class="code-val">6</span>
-                    </div>
-                </div>
-                <p class="hint">Hint: Math is your friend.</p>
-            </div>
-
-            <div class="editor-section glass-panel">
-                <div class="editor-header">
-                    <select id="language" class="cyber-select">
-                        <option value="python">Python 3</option>
-                        <option value="cpp">C++</option>
-                        <option value="go">Go</option>
-                    </select>
-                    <button id="submitBtn" class="cyber-btn">Submit Code</button>
-                </div>
-                <textarea id="codeEditor" spellcheck="false">def solve(n):
-    # Write your logic here
-    pass</textarea>
-                <div id="statusMessage" class="status hidden"></div>
-            </div>
-        </section>
+    <!-- Hero Section -->
+    <main class="landing-hero">
+        <div class="glitch-wrapper">
+            <h1 class="hero-title glitch" data-text="BEYOND LIMITS">BEYOND LIMITS</h1>
+        </div>
+        <p class="hero-subtitle">
+            > Compile. Execute. Conquer. <br>
+            The official competitive programming battleground of Amrita Vishwa Vidyapeetham, Nagercoil.
+        </p>
     </main>
+
+    <!-- Sections (Upcoming / Past) -->
+    <section id="upcoming" class="content-section">
+        <div class="cards-grid" id="cards-container">
+            <!-- Glass panels with mouse-tracking spotlight -->
+            <div class="contest-card glass-panel spotlight-card">
+                <div class="card-content">
+                    <div class="tech-icon">{"<>"}</div>
+                    <h3>Reverse Coding Duel</h3>
+                    <p class="mono-text">Status: [ACTIVE]</p>
+                    <p class="date-text">T-Minus: 11 July 2026</p>
+                    <a href="arena.html" class="btn-outline">Deploy_Code</a>
+                </div>
+            </div>
+            
+            <div class="contest-card glass-panel spotlight-card">
+                <div class="card-content">
+                    <div class="tech-icon">{#_#}</div>
+                    <h3>Code-Golf Arena</h3>
+                    <p class="mono-text">Status: [LOCKED]</p>
+                    <p class="date-text">T-Minus: 08 August 2026</p>
+                    <button class="btn-outline disabled" disabled>Access_Denied</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Marquee Footer -->
+    <footer class="marquee-footer">
+        <div class="marquee-container">
+            <div class="marquee-content">
+                <div class="logo-item amrita">AMRITA VISHWA VIDYAPEETHAM</div>
+                <div class="logo-item divider">///</div>
+                <div class="logo-item icpc">NAGERCOIL ICPC CLUB</div>
+                <div class="logo-item divider">///</div>
+                <div class="logo-item amrita">AMRITA VISHWA VIDYAPEETHAM</div>
+                <div class="logo-item divider">///</div>
+                <div class="logo-item icpc">NAGERCOIL ICPC CLUB</div>
+                <div class="logo-item divider">///</div>
+                <div class="logo-item amrita">AMRITA VISHWA VIDYAPEETHAM</div>
+                <div class="logo-item divider">///</div>
+                <div class="logo-item icpc">NAGERCOIL ICPC CLUB</div>
+                <div class="logo-item divider">///</div>
+            </div>
+        </div>
+    </footer>
+    
     <script src="js/app.js"></script>
 </body>
 </html>
