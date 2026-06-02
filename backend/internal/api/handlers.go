@@ -3,9 +3,11 @@ package api
 import (
 	"context"
 	"encoding/json"
+	"fmt"
 	"net/http"
 
 	"github.com/Dharun-2k7/online-coding-platform/internal/db"
+	"github.com/Dharun-2k7/online-coding-platform/internal/judge"
 	"github.com/gin-gonic/gin"
 )
 
@@ -79,12 +81,21 @@ func RunCode(c *gin.Context) {
 		return
 	}
 
-	// TODO: Phase 2 - Send to High Priority Redis Queue or execute directly via a secure Docker container
-	// For now, return a mock response so the UI works
-	mockOutput := "Executed in Sandbox (Mock).\n\nReceived Input:\n" + req.Input
-	
+	// Use our newly created Docker Sandbox
+	// Note: This blocks the HTTP request until execution finishes (up to 2.0s)
+	// which is perfectly fine for a manual "Run" check.
+	res, err := judge.RunSecurely(req.Code, req.Language, req.Input)
+
+	if err != nil {
+		c.JSON(http.StatusOK, gin.H{
+			"output": "",
+			"stderr": fmt.Sprintf("Sandbox Error: %v", err),
+		})
+		return
+	}
+
 	c.JSON(http.StatusOK, gin.H{
-		"output": mockOutput,
-		"stderr": "",
+		"output": res.Stdout,
+		"stderr": res.Stderr,
 	})
 }
