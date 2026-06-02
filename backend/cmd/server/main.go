@@ -4,7 +4,9 @@ import (
 	"log"
 
 	"github.com/Dharun-2k7/online-coding-platform/internal/api"
+	"github.com/Dharun-2k7/online-coding-platform/internal/auth"
 	"github.com/Dharun-2k7/online-coding-platform/internal/db"
+	"github.com/Dharun-2k7/online-coding-platform/internal/middleware"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 )
@@ -18,6 +20,7 @@ func main() {
 	// Initialize Postgres and Redis
 	db.InitPostgres()
 	db.InitRedis()
+	auth.InitOAuth()
 
 	// Setup Router
 	r := gin.Default()
@@ -34,11 +37,21 @@ func main() {
 		c.Next()
 	})
 
-	// Routes
+	// Public Routes
 	r.GET("/health", api.HealthCheck)
-	r.POST("/api/submit", api.SubmitCode)
-	r.POST("/api/run", api.RunCode)
 	r.GET("/api/submissions/:id", api.GetSubmissionStatus)
+	r.POST("/api/run", api.RunCode) // Allow unauthenticated manual runs
+
+	// Auth Routes
+	r.GET("/api/auth/google/login", api.GoogleLogin)
+	r.GET("/api/auth/google/callback", api.GoogleCallback)
+
+	// Protected Routes
+	protected := r.Group("/api")
+	protected.Use(middleware.RequireAuth())
+	{
+		protected.POST("/submit", api.SubmitCode)
+	}
 
 	// Start Server
 	log.Println("Starting server on :8080")

@@ -1,4 +1,19 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Auth Check Logic
+    const urlParams = new URLSearchParams(window.location.search);
+    const tokenFromUrl = urlParams.get('token');
+    if (tokenFromUrl) {
+        localStorage.setItem('jwt_token', tokenFromUrl);
+        window.history.replaceState({}, document.title, window.location.pathname);
+    }
+
+    const token = localStorage.getItem('jwt_token');
+    // We only enforce login on the arena page. If we are on index.html, we don't redirect.
+    if (!token && window.location.pathname.includes('arena.html')) {
+        window.location.href = 'login.html';
+        return;
+    }
+
     // Spotlight Effect for Cyber Cards (Landing Page)
     const cards = document.querySelectorAll('.spotlight-card');
     cards.forEach(card => {
@@ -79,11 +94,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 const response = await fetch('http://localhost:8080/api/submit', {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
                     },
                     body: JSON.stringify({
-                        user_id: 1, // Hardcoded for MVP
-                        problem_id: 1, // Hardcoded for MVP
+                        problem_id: 1, // Hardcoded for MVP (will be dynamic soon)
                         code: code,
                         language: language
                     })

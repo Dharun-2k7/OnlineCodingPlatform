@@ -18,7 +18,6 @@ func HealthCheck(c *gin.Context) {
 
 // SubmitRequest defines the JSON payload for a code submission
 type SubmitRequest struct {
-	UserID    int    `json:"user_id" binding:"required"`
 	ProblemID int    `json:"problem_id" binding:"required"`
 	Code      string `json:"code" binding:"required"`
 	Language  string `json:"language" binding:"required"`
@@ -33,10 +32,11 @@ func SubmitCode(c *gin.Context) {
 	}
 
 	// 1. Insert into Postgres as PENDING
+	userID := c.GetInt("user_id") // Extracted by auth middleware
 	var submissionID int
 	query := `INSERT INTO submissions (user_id, problem_id, code, language, status) 
 			  VALUES ($1, $2, $3, $4, 'PENDING') RETURNING id`
-	err := db.DB.QueryRow(query, req.UserID, req.ProblemID, req.Code, req.Language).Scan(&submissionID)
+	err := db.DB.QueryRow(query, userID, req.ProblemID, req.Code, req.Language).Scan(&submissionID)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to save submission"})
 		return

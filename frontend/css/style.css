@@ -28,285 +28,292 @@ body {
     overflow-x: hidden;
 }
 
-/* ================== LANDING PAGE STYLES (CYBER AESTHETIC) ================== */
+/* ================== LANDING PAGE STYLES (EVENTURA THEME) ================== */
 
-.home-body {
+.landing-body {
     position: relative;
     z-index: 1;
     overflow-x: hidden;
-}
-
-/* Glowing Cyber Grid Background */
-.cyber-grid {
-    position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    z-index: -2;
     background-color: #030305;
-    background-image: 
-        linear-gradient(rgba(0, 255, 204, 0.1) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 255, 204, 0.1) 1px, transparent 1px);
-    background-size: 50px 50px;
-    transform: perspective(500px) rotateX(60deg) translateY(-100px) scale(3);
-    animation: grid-move 10s linear infinite;
-    mask-image: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 80%);
-    -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 80%);
-}
-
-@keyframes grid-move {
-    0% { background-position: 0 0; }
-    100% { background-position: 0 50px; }
-}
-
-.home-body::before {
-    content: "";
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: radial-gradient(circle at 50% 30%, transparent 0%, #030305 70%);
-    z-index: -1;
-    pointer-events: none;
+    background-image: radial-gradient(circle at 50% 0%, rgba(30, 20, 50, 0.4) 0%, transparent 60%);
 }
 
 .landing-nav {
-    border-bottom: 1px solid rgba(0, 255, 204, 0.2);
-    padding: 30px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 60px;
     background: rgba(3, 3, 5, 0.8);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    position: fixed;
+    top: 0; left: 0; width: 100%;
+    z-index: 100;
 }
 
 .landing-logo {
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 800;
-    font-family: 'Fira Code', monospace;
-    text-shadow: 0 0 10px rgba(0, 255, 204, 0.5);
+    letter-spacing: 1px;
 }
 
 .landing-logo .amrita { color: #fff; }
-.landing-logo .divider { color: var(--accent); margin: 0 10px; }
-.landing-logo .icpc { color: var(--accent); }
+.landing-logo .divider { color: #555; margin: 0 10px; }
+.landing-logo .icpc { color: #fff; }
 
-.btn-neon {
-    background: transparent;
-    color: var(--accent);
-    padding: 10px 25px;
-    border: 1px solid var(--accent);
-    border-radius: 4px;
+.nav-links a {
+    color: var(--text-dim);
+    text-decoration: none;
+    margin: 0 20px;
+    font-size: 15px;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+.nav-links a:hover { color: #fff; }
+
+.btn-primary {
+    background: var(--pink-gradient);
+    color: white;
+    padding: 10px 24px;
+    border-radius: 30px;
     text-decoration: none;
     font-weight: 600;
-    font-family: 'Fira Code', monospace;
+    transition: transform 0.3s, box-shadow 0.3s;
+    border: none;
+}
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(255, 64, 129, 0.4);
+}
+
+.btn-outline {
+    background: transparent;
+    color: white;
+    padding: 10px 24px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    border: 1px solid rgba(255, 255, 255, 0.2);
     transition: all 0.3s;
-    box-shadow: inset 0 0 10px rgba(0, 255, 204, 0), 0 0 10px rgba(0, 255, 204, 0.2);
+}
+.btn-outline:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.5);
 }
 
-.btn-neon:hover {
-    background: rgba(0, 255, 204, 0.1);
-    box-shadow: inset 0 0 15px rgba(0, 255, 204, 0.3), 0 0 20px rgba(0, 255, 204, 0.5);
-    text-shadow: 0 0 5px var(--accent);
-}
-
-.landing-hero {
+.hero-section {
     text-align: center;
-    margin-top: 10vh;
-    padding: 0 20px;
+    padding: 180px 20px 100px;
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
-/* Glitch Effect */
-.glitch-wrapper {
-    position: relative;
-    display: inline-block;
-    margin-bottom: 20px;
+.badge {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 12px;
+    letter-spacing: 1px;
+    margin-bottom: 30px;
+    background: rgba(255, 255, 255, 0.03);
 }
 
 .hero-title {
-    font-size: 90px;
+    font-size: 64px;
     font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 20px;
     color: #fff;
-    text-transform: uppercase;
-    letter-spacing: 5px;
 }
 
-.glitch {
-    position: relative;
-}
-
-.glitch::before, .glitch::after {
-    content: attr(data-text);
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: transparent;
-}
-
-.glitch::before {
-    left: 4px;
-    text-shadow: -2px 0 red;
-    animation: glitch-anim-1 2s infinite linear alternate-reverse;
-    clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
-}
-
-.glitch::after {
-    left: -4px;
-    text-shadow: -2px 0 blue;
-    animation: glitch-anim-2 3s infinite linear alternate-reverse;
-    clip-path: polygon(0 66%, 100% 66%, 100% 100%, 0 100%);
-}
-
-@keyframes glitch-anim-1 {
-    0% { clip-path: polygon(0 20%, 100% 20%, 100% 21%, 0 21%); }
-    20% { clip-path: polygon(0 33%, 100% 33%, 100% 33%, 0 33%); }
-    40% { clip-path: polygon(0 44%, 100% 44%, 100% 44%, 0 44%); }
-    60% { clip-path: polygon(0 50%, 100% 50%, 100% 20%, 0 20%); }
-    80% { clip-path: polygon(0 70%, 100% 70%, 100% 70%, 0 70%); }
-    100% { clip-path: polygon(0 80%, 100% 80%, 100% 80%, 0 80%); }
-}
-
-@keyframes glitch-anim-2 {
-    0% { clip-path: polygon(0 25%, 100% 25%, 100% 30%, 0 30%); }
-    20% { clip-path: polygon(0 3%, 100% 3%, 100% 3%, 0 3%); }
-    40% { clip-path: polygon(0 5%, 100% 5%, 100% 20%, 0 20%); }
-    60% { clip-path: polygon(0 15%, 100% 15%, 100% 15%, 0 15%); }
-    80% { clip-path: polygon(0 10%, 100% 10%, 100% 10%, 0 10%); }
-    100% { clip-path: polygon(0 50%, 100% 50%, 100% 59%, 0 59%); }
+.gradient-text {
+    background: var(--pink-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .hero-subtitle {
+    color: var(--text-dim);
+    font-size: 20px;
     max-width: 600px;
+}
+
+.section-padding {
+    padding: 80px 20px;
+    max-width: 1200px;
     margin: 0 auto;
+}
+
+.section-title {
+    font-size: 40px;
+    font-weight: 800;
+    margin-bottom: 40px;
+}
+
+.text-center { text-align: center; }
+
+.who-we-are {
+    margin-top: -50px;
+}
+
+.glass-container {
+    background: rgba(20, 20, 25, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 24px;
+    padding: 60px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+}
+
+.glass-container p {
     color: var(--text-dim);
     font-size: 18px;
-    line-height: 1.6;
-    font-family: 'Fira Code', monospace;
-    border-left: 2px solid var(--accent);
-    padding-left: 15px;
-    text-align: left;
+    line-height: 1.8;
+    margin-bottom: 20px;
 }
 
-.content-section {
-    max-width: 900px;
-    margin: 80px auto;
-    position: relative;
-    z-index: 2;
-}
-
-.cards-grid {
-    display: flex;
-    justify-content: center;
+.mission-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 30px;
-    margin-top: 40px;
-    flex-wrap: wrap;
 }
 
-/* Mouse-tracking spotlight card */
-.spotlight-card {
-    position: relative;
-    flex: 1;
-    min-width: 300px;
-    background: rgba(10, 10, 15, 0.8);
+.mission-card {
+    background: rgba(255, 255, 255, 0.02);
     border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 8px;
-    overflow: hidden;
-    padding: 2px; /* Border thickness for the spotlight */
-}
-
-.spotlight-card::before {
-    content: "";
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: radial-gradient(
-        800px circle at var(--mouse-x, 0) var(--mouse-y, 0),
-        rgba(0, 255, 204, 0.15),
-        transparent 40%
-    );
-    z-index: 0;
-}
-
-.card-content {
-    background: #050508;
-    border-radius: 6px;
+    border-radius: 16px;
     padding: 40px 30px;
-    height: 100%;
-    position: relative;
-    z-index: 1;
-    text-align: left;
+    transition: transform 0.3s ease, border-color 0.3s;
+    transform-style: preserve-3d;
+    perspective: 1000px;
 }
 
-.tech-icon {
-    font-family: 'Fira Code', monospace;
-    color: var(--accent);
+.mission-card:hover {
+    border-color: rgba(255, 64, 129, 0.3);
+}
+
+.icon-circle {
+    width: 50px; height: 50px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-size: 24px;
     margin-bottom: 20px;
 }
 
-.card-content h3 { margin-bottom: 10px; font-size: 24px; color: #fff; }
-.mono-text { font-family: 'Fira Code', monospace; color: var(--accent); font-size: 14px; margin-bottom: 5px; }
-.date-text { color: var(--text-dim); font-size: 14px; margin-bottom: 25px; }
-
-.btn-outline {
-    background: transparent;
-    color: #fff;
-    border: 1px solid rgba(255,255,255,0.3);
-    padding: 8px 20px;
-    border-radius: 4px;
-    text-decoration: none;
-    font-family: 'Fira Code', monospace;
-    font-size: 14px;
-    display: inline-block;
-    transition: all 0.3s;
+.mission-card h3 {
+    font-size: 20px;
+    margin-bottom: 15px;
 }
 
-.btn-outline:hover:not(.disabled) {
-    border-color: var(--accent);
-    color: var(--accent);
-    box-shadow: 0 0 10px rgba(0, 255, 204, 0.2);
-}
-
-.btn-outline.disabled {
-    opacity: 0.4;
-    cursor: not-allowed;
-    border-color: #555;
-    color: #555;
-}
-
-/* Marquee Footer */
-.marquee-footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background: rgba(3, 3, 5, 0.9);
-    border-top: 1px solid rgba(0, 255, 204, 0.2);
-    padding: 10px 0;
-    z-index: 10;
-}
-
-.marquee-container {
-    overflow: hidden;
-    white-space: nowrap;
-    width: 100%;
-    position: relative;
-}
-
-.marquee-content {
-    display: inline-block;
-    animation: scroll 15s linear infinite;
-}
-
-.logo-item {
-    display: inline-block;
-    margin: 0 30px;
-    font-size: 16px;
-    font-weight: 600;
-    font-family: 'Fira Code', monospace;
+.mission-card p {
     color: var(--text-dim);
-    letter-spacing: 2px;
+    line-height: 1.6;
 }
 
-.logo-item.amrita { color: #fff; }
-.logo-item.icpc { color: var(--accent); }
-.logo-item.divider { opacity: 0.3; }
+.events-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 40px;
+}
 
-@keyframes scroll {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
+.event-card {
+    background: rgba(10, 10, 15, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    padding: 40px;
+    position: relative;
+    overflow: hidden;
+}
+
+.event-status {
+    position: absolute;
+    top: 20px; right: 20px;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    padding: 4px 12px;
+    border-radius: 12px;
+}
+
+.event-status.upcoming { background: rgba(0, 255, 204, 0.1); color: #00ffcc; }
+.event-status.past { background: rgba(255, 255, 255, 0.05); color: #888; }
+
+.event-card h3 { font-size: 28px; margin-bottom: 15px; margin-top: 20px; }
+.event-card p { color: var(--text-dim); line-height: 1.6; }
+
+.main-footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 80px 60px 40px;
+    background: #030305;
+    margin-top: 80px;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-title { margin-bottom: 25px; font-size: 18px; }
+.footer-text { color: var(--text-dim); line-height: 1.8; }
+
+.footer-col a {
+    display: block;
+    color: var(--text-dim);
+    text-decoration: none;
+    margin-bottom: 15px;
+    transition: color 0.3s;
+}
+.footer-col a:hover { color: #fff; }
+
+.contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    margin-bottom: 20px;
+    color: var(--text-dim);
+}
+
+.footer-bottom {
+    max-width: 1200px;
+    margin: 60px auto 0;
+    padding-top: 30px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    display: flex;
+    justify-content: space-between;
+    color: #666;
+    font-size: 14px;
+}
+.legal-links a { color: #666; text-decoration: none; margin-left: 20px; }
+
+/* ANIMATIONS (GSAP-like via Vanilla JS) */
+.fade-up {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeUpAnim 0.8s ease forwards;
+}
+
+@keyframes fadeUpAnim {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.scroll-reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.scroll-reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 
