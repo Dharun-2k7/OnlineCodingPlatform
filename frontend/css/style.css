@@ -486,6 +486,10 @@ h1, h2, h3, h4, h5, h6, .display-font {
     opacity: 0;
     transform: translateY(100px);
 }
+.success-slide:first-child {
+    opacity: 1;
+    transform: translateY(0);
+}
 .slide-year {
     font-family: 'Space Grotesk', sans-serif;
     font-size: 20px;
