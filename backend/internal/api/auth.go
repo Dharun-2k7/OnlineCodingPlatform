@@ -12,6 +12,7 @@ import (
 	"github.com/Dharun-2k7/online-coding-platform/internal/auth"
 	"github.com/Dharun-2k7/online-coding-platform/internal/db"
 	"github.com/gin-gonic/gin"
+	"golang.org/x/crypto/bcrypt"
 )
 
 // Generate a random state string for CSRF protection
@@ -98,4 +99,73 @@ func GoogleCallback(c *gin.Context) {
 	// or redirect back to the frontend with the token in the URL fragment (hash).
 	// We will redirect back to the frontend's arena page and pass the token securely.
 	c.Redirect(http.StatusTemporaryRedirect, "/arena.html?token="+jwtToken)
+}
+
+// --- Standard Authentication ---
+
+type RegisterRequest struct {
+	Name     string `json:"name" binding:"required"`
+	Email    string `json:"email" binding:"required,email"`
+	Password string `json:"password" binding:"required,min=6"`
+}
+
+func RegisterUser(c *gin.Context) {
+	var req RegisterRequest
+	if err := c.ShouldBindJSON(&req); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(req.Password), bcrypt.DefaultCost)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to hash password"})
+		return
+	}
+
+	var userID int
+	err = db.DB.QueryRow(`
+		INSERT INTO users (name, email, password_hash) 
+		VALUES ($1, $2, $3) RETURNING id
+	`, req.Name, req.Email, string(hashedPassword)).Scan(&userID)
+
+	if err != nil {
+		c.JSON(http.StatusConflict, gin.H{"error": "Email already exists"})
+		return
+	}
+
+	c.JSON(http.StatusCreated, gin.H{"message": "User registered successfully!"})
+}
+
+type LoginRequest struct {
+	Email    string `json:"email" binding:"required,email"`
+	Password string `json:"password" binding:"required"`
+}
+
+func LoginUser(c *gin.Context) {
+	var req LoginRequest
+	if err := c.ShouldBindJSON(&req); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	var userID int
+	var passwordHash *string
+	err := db.DB.QueryRow(`SELECT id, password_hash FROM users WHERE email = $1`, req.Email).Scan(&userID, &passwordHash)
+	if err != nil || passwordHash == nil {
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid email or password. (OAuth users must sign in with Google)"})
+		return
+	}
+
+	if err := bcrypt.CompareHashAndPassword([]byte(*passwordHash), []byte(req.Password)); err != nil {
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid email or password"})
+		return
+	}
+
+	jwtToken, err := auth.GenerateToken(userID, req.Email)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to generate token"})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"token": jwtToken})
 }

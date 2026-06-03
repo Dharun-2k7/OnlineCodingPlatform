@@ -1,6 +1,48 @@
 document.addEventListener('DOMContentLoaded', () => {
     
-    // 1. Scroll Reveal Animation using Intersection Observer
+    // --- 1. Mobile Hamburger Menu ---
+    const hamburger = document.getElementById('hamburger-menu');
+    const navLinks = document.getElementById('nav-links');
+    
+    if (hamburger && navLinks) {
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // Close menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+    }
+
+    // --- 2. GSAP ScrollTrigger Pro Animations ---
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+        gsap.registerPlugin(ScrollTrigger);
+
+        const cube = document.getElementById('hero-3d-element');
+        if (cube) {
+            // As you scroll down, the cube rotates heavily and scales up
+            gsap.to(cube, {
+                scrollTrigger: {
+                    trigger: ".hero-section",
+                    start: "top top",
+                    end: "bottom top",
+                    scrub: 1 // smooth scrubbing
+                },
+                rotationX: 360,
+                rotationY: 720,
+                scale: 1.5,
+                y: 300, // moves down into the next section slightly
+                ease: "none"
+            });
+        }
+    }
+
+    // --- 3. Scroll Reveal Animation using Intersection Observer ---
     const observerOptions = {
         root: null,
         rootMargin: '0px',
@@ -20,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const revealElements = document.querySelectorAll('.scroll-reveal');
     revealElements.forEach(el => observer.observe(el));
 
-    // 2. 3D Tilt Effect for Mission Cards
+    // --- 4. 3D Tilt Effect for Mission Cards ---
     const tiltCards = document.querySelectorAll('.tilt-card');
     
     tiltCards.forEach(card => {
@@ -48,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 3. Spotlight effect for Who We Are box
+    // --- 5. Spotlight effect for Who We Are box ---
     const spotlightBox = document.querySelector('.spotlight-box');
     if (spotlightBox) {
         spotlightBox.addEventListener('mousemove', e => {

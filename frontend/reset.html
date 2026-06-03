@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reset Password - ICPC Amrita Nagercoil</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #0d0d12;
+            margin: 0;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .login-container {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+            text-align: center;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .login-title {
+            color: white;
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .login-subtitle {
+            color: #a0a0a0;
+            margin-bottom: 30px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .input-group label {
+            display: block;
+            color: var(--text-dim);
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: #fff;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .input-group input:focus {
+            border-color: #ff4081;
+        }
+
+        .google-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 12px;
+            background-color: white;
+            color: #333;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-decoration: none;
+        }
+
+        .google-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+        }
+
+        .auth-link {
+            color: #ff4081;
+            text-decoration: none;
+            font-size: 14px;
+            margin-top: 20px;
+            display: block;
+        }
+        .auth-link:hover { text-decoration: underline; }
+
+        .success-msg {
+            color: #00ffcc;
+            font-size: 14px;
+            margin-bottom: 15px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-container">
+        <h1 class="login-title">Reset Password</h1>
+        <p class="login-subtitle">We'll send you an email to reset it.</p>
+
+        <div id="successBox" class="success-msg"></div>
+
+        <form id="resetForm">
+            <div class="input-group">
+                <label>Email</label>
+                <input type="email" id="email" required>
+            </div>
+            <button type="submit" class="google-btn" style="background: linear-gradient(90deg, #b388ff 0%, #ff4081 100%); color: white;">
+                Send Reset Link
+            </button>
+        </form>
+
+        <a href="login.html" class="auth-link">Back to Sign In</a>
+    </div>
+
+    <script>
+        document.getElementById('resetForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const successBox = document.getElementById('successBox');
+            
+            // Mock functionality for MVP
+            successBox.textContent = 'If an account exists, a reset link has been sent.';
+            successBox.style.display = 'block';
+        });
+    </script>
+</body>
+</html>

@@ -45,6 +45,8 @@ func main() {
 	// Auth Routes
 	r.GET("/api/auth/google/login", api.GoogleLogin)
 	r.GET("/api/auth/google/callback", api.GoogleCallback)
+	r.POST("/api/auth/register", api.RegisterUser)
+	r.POST("/api/auth/login", api.LoginUser)
 
 	// Protected Routes
 	protected := r.Group("/api")
