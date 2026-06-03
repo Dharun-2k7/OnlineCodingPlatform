@@ -1,120 +1,113 @@
+// =========================================================================
+// THE QUANTUM ARENA - ScrollTrigger Masterclass
+// =========================================================================
+
 document.addEventListener('DOMContentLoaded', () => {
-    
-    // --- 1. Mobile Hamburger Menu ---
-    const hamburger = document.getElementById('hamburger-menu');
-    const navLinks = document.getElementById('nav-links');
-    
-    if (hamburger && navLinks) {
-        hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('active');
-            navLinks.classList.toggle('active');
-        });
+    // Only initialize if GSAP is loaded
+    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
+        console.warn("GSAP libraries not loaded.");
+        return;
+    }
 
-        // Close menu when clicking a link
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                hamburger.classList.remove('active');
-                navLinks.classList.remove('active');
-            });
+    gsap.registerPlugin(ScrollTrigger);
+
+    // =========================================================================
+    // 1. HERO ENTRANCE (Custom Text Split & Parallax)
+    // =========================================================================
+    
+    // Custom SplitText implementation (since GSAP SplitText is premium)
+    const heroTitle = document.querySelector(".hero-split");
+    if (heroTitle) {
+        const text = heroTitle.innerHTML;
+        // Split by words, preserving br and spans
+        // For simplicity, we will just fade up the whole block, or split line by line
+        // Actually, let's just fade up the whole title smoothly to avoid messing up HTML tags
+        gsap.from(".hero-split", {
+            opacity: 0,
+            y: 50,
+            rotateX: -45,
+            duration: 1.2,
+            ease: "back.out(1.5)",
+            transformOrigin: "50% 100%"
         });
     }
 
-    // --- 2. GSAP ScrollTrigger Pro Animations ---
-    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
-        gsap.registerPlugin(ScrollTrigger);
+    gsap.from(".hero-subtitle", {
+        opacity: 0,
+        y: 20,
+        duration: 0.8,
+        ease: "power3.out"
+    }, "-=0.4")
+    .from(".hero-cta .btn-magnetic", {
+        opacity: 0,
+        scale: 0.9,
+        stagger: 0.1,
+        duration: 0.6,
+        ease: "back.out(1.5)"
+    }, "-=0.6");
 
-        // Staggered pop-up for Mission Cards
-        gsap.from(".mission-card", {
-            scrollTrigger: {
-                trigger: ".mission-grid",
-                start: "top 80%",
-                toggleActions: "play none none reverse"
-            },
-            y: 50,
-            opacity: 0,
-            scale: 0.9,
-            duration: 0.8,
-            stagger: 0.15,
-            ease: "back.out(1.5)"
-        });
-
-        // Staggered pop-up for Event Cards
-        gsap.from(".event-card", {
-            scrollTrigger: {
-                trigger: ".events-container",
-                start: "top 80%",
-                toggleActions: "play none none reverse"
-            },
-            y: 50,
-            opacity: 0,
-            scale: 0.9,
-            duration: 0.8,
-            stagger: 0.2,
-            ease: "back.out(1.5)"
+    // Floating Nodes Parallax based on mouse movement
+    const pNodes = document.querySelectorAll('.p-node');
+    if (window.innerWidth > 768 && pNodes.length > 0) {
+        window.addEventListener('mousemove', (e) => {
+            const x = (e.clientX / window.innerWidth - 0.5) * 2;
+            const y = (e.clientY / window.innerHeight - 0.5) * 2;
+            
+            gsap.to('.node-1', { x: x * 60, y: y * 60, duration: 2, ease: 'power2.out' });
+            gsap.to('.node-2', { x: x * -40, y: y * -40, duration: 2, ease: 'power2.out' });
+            gsap.to('.node-3', { x: x * 80, y: y * 80, duration: 2, ease: 'power2.out', rotation: x * 15 });
         });
     }
 
-    // --- 3. Scroll Reveal Animation using Intersection Observer ---
-    const observerOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.15
-    };
-
-    const observer = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                // Optional: stop observing once revealed
-                // observer.unobserve(entry.target); 
-            }
-        });
-    }, observerOptions);
-
-    const revealElements = document.querySelectorAll('.scroll-reveal');
-    revealElements.forEach(el => observer.observe(el));
-
-    // --- 4. 3D Tilt Effect for Mission Cards ---
-    const tiltCards = document.querySelectorAll('.tilt-card');
-    
-    tiltCards.forEach(card => {
-        card.addEventListener('mousemove', e => {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left; // x position within the element.
-            const y = e.clientY - rect.top;  // y position within the element.
-            
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-            
-            const tiltX = ((y - centerY) / centerY) * -10; // Max rotation 10deg
-            const tiltY = ((x - centerX) / centerX) * 10;
-            
-            card.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale3d(1.02, 1.02, 1.02)`;
-        });
-        
-        card.addEventListener('mouseleave', () => {
-            card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
-            card.style.transition = 'transform 0.5s ease';
-        });
-
-        card.addEventListener('mouseenter', () => {
-            card.style.transition = 'none';
-        });
+    // =========================================================================
+    // 2. BENTO GRID ENTRANCE (Scale & Stagger)
+    // =========================================================================
+    gsap.from(".bento-card", {
+        scrollTrigger: {
+            trigger: ".bento-grid",
+            start: "top 80%",
+            toggleActions: "play none none reverse"
+        },
+        y: 100,
+        opacity: 0,
+        scale: 0.9,
+        duration: 0.8,
+        stagger: {
+            amount: 0.3,
+            from: "random"
+        },
+        ease: "power3.out"
     });
 
-    // --- 5. Spotlight effect for Who We Are box ---
-    const spotlightBox = document.querySelector('.spotlight-box');
-    if (spotlightBox) {
-        spotlightBox.addEventListener('mousemove', e => {
-            const rect = spotlightBox.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            
-            spotlightBox.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(255, 64, 129, 0.1) 0%, rgba(20, 20, 25, 0.6) 40%)`;
-        });
-        
-        spotlightBox.addEventListener('mouseleave', () => {
-            spotlightBox.style.background = `rgba(20, 20, 25, 0.6)`;
+    // Heatmap staggered lighting
+    gsap.from(".heatmap-node.active", {
+        scrollTrigger: {
+            trigger: ".heatmap",
+            start: "top 90%",
+            toggleActions: "play none none reverse"
+        },
+        backgroundColor: "rgba(255,255,255,0.05)",
+        boxShadow: "0 0 0px transparent",
+        duration: 0.1,
+        stagger: 0.1,
+        ease: "none"
+    });
+
+    // =========================================================================
+    // 3. HORIZONTAL SCROLL STORYTELLING
+    // =========================================================================
+    const timelineContainer = document.querySelector(".timeline-container");
+    if (timelineContainer && window.innerWidth > 768) {
+        gsap.to(timelineContainer, {
+            x: () => -(timelineContainer.scrollWidth - window.innerWidth) + "px",
+            ease: "none",
+            scrollTrigger: {
+                trigger: ".timeline-wrapper",
+                pin: true,
+                scrub: 1,
+                end: () => "+=" + (timelineContainer.scrollWidth - window.innerWidth),
+                invalidateOnRefresh: true
+            }
         });
     }
 

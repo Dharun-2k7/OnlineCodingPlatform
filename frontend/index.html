@@ -3,154 +3,160 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ICPC Amrita Nagercoil - Never Miss a Contest</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body class="landing-body">
+    <title>ICPC Amrita Nagercoil - The Quantum Arena</title>
     
-    <!-- Navigation -->
-    <nav class="navbar landing-nav">
-        <div class="landing-logo">
-            <span class="amrita">AMRITA</span> <span class="divider">/</span> <span class="icpc">ICPC_CLUB</span>
-        </div>
-        
-        <!-- Hamburger Icon -->
-        <div class="hamburger" id="hamburger-menu">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- GSAP for Awwwards-tier animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+</head>
+<body data-theme="quantum">
 
-        <div class="nav-links" id="nav-links">
-            <a href="#">Home</a>
-            <a href="#about">About</a>
-            <a href="#events">Events</a>
-            <a href="https://www.linkedin.com/company/amrita-nagercoil-icpc" target="_blank">LinkedIn</a>
-            <a href="login.html" class="btn-primary mobile-only-btn">Sign In</a>
+    <!-- Background Effects -->
+    <div class="noise-bg"></div>
+    <div class="mesh-gradient"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-brand">
+            AMRITA<span>/</span>ICPC
         </div>
-        
-        <a href="login.html" class="btn-primary desktop-btn">Sign In</a>
+        <div class="nav-controls">
+            <!-- Dynamic Theme Switcher -->
+            <div class="theme-switcher">
+                <div class="theme-dot" data-set="quantum" title="Quantum Neon"></div>
+                <div class="theme-dot" data-set="aurora" title="Aurora Intelligence"></div>
+                <div class="theme-dot" data-set="solar" title="Solar Ember"></div>
+            </div>
+            
+            <a href="login.html" class="btn-magnetic">Enter Arena</a>
+        </div>
     </nav>
 
     <!-- Hero Section -->
-    <main class="hero-section">
-        <div class="hero-content">
-            <div class="badge fade-up">ICPC Nagercoil</div>
-            <h1 class="hero-title fade-up" style="animation-delay: 0.1s;">
-                Empowering coding<br>
-                <span class="gradient-text">and logic</span>
-            </h1>
-            <p class="hero-subtitle fade-up" style="animation-delay: 0.2s;">
-                at Amrita Vishwa Vidyapeetham, Nagercoil Campus
-            </p>
+    <header class="hero">
+        <!-- Floating Parallax Nodes -->
+        <div class="parallax-nodes">
+            <!-- Node 1 -->
+            <svg class="p-node node-1" style="position:absolute; top:20%; left:15%; width:60px; opacity:0.5;" viewBox="0 0 100 100" fill="none" stroke="var(--primary-accent)" stroke-width="2">
+                <polygon points="50,5 95,25 95,75 50,95 5,75 5,25" />
+            </svg>
+            <!-- Node 2 -->
+            <svg class="p-node node-2" style="position:absolute; top:70%; left:10%; width:40px; opacity:0.3;" viewBox="0 0 100 100" fill="none" stroke="var(--secondary-accent)" stroke-width="4">
+                <circle cx="50" cy="50" r="45" />
+            </svg>
+            <!-- Node 3 -->
+            <svg class="p-node node-3" style="position:absolute; top:30%; right:15%; width:80px; opacity:0.6;" viewBox="0 0 100 100" fill="none" stroke="var(--primary-accent)" stroke-width="1">
+                <rect x="20" y="20" width="60" height="60" transform="rotate(45 50 50)" />
+            </svg>
         </div>
-        
-    </main>
 
-    <!-- Who We Are -->
-    <section id="about" class="who-we-are section-padding scroll-reveal">
-        <div class="glass-container spotlight-box">
-            <h2 class="section-title">Who We Are</h2>
-            <p>We are a dedicated team of student developers and competitive programmers from Amrita Vishwa Vidyapeetham, Nagercoil Campus, passionate about logic, algorithms, and pushing our coding limits.</p>
-            <p>This platform was developed by students, for students, to host our weekly Reverse Coding and Code Golf contests. We believe every challenge is an opportunity to sharpen our skills and connect with like-minded problem solvers.</p>
-            <div class="button-group" style="margin-top: 30px;">
-                <a href="https://amrita.edu/campus/nagercoil" target="_blank" class="btn-outline">Campus Website</a>
-                <a href="https://www.linkedin.com/company/amrita-nagercoil-icpc" target="_blank" class="btn-primary" style="margin-left: 15px;">Our LinkedIn</a>
+        <h1 class="title-massive hero-split">
+            Master algorithms.<br>
+            <span class="gradient-text">Defy limits.</span>
+        </h1>
+        <p class="hero-subtitle">
+            The next-generation competitive programming platform designed for speed, logic, and aesthetic superiority.
+        </p>
+        <div class="hero-cta">
+            <a href="arena.html" class="btn-magnetic">Start Coding</a>
+            <a href="#bento" class="btn-magnetic btn-ghost" style="margin-left: 15px;">Discover</a>
+        </div>
+    </header>
+
+    <!-- Bento Grid Section -->
+    <section id="bento" class="section-container">
+        <h2 class="display-font" style="font-size: 40px; margin-bottom: 40px;">System Core</h2>
+        
+        <div class="bento-grid">
+            
+            <!-- Large Card -->
+            <div class="bento-card span-2 row-span-2">
+                <span class="bento-icon">⚔️</span>
+                <h3>The Duel Arena</h3>
+                <p>Engage in real-time Reverse Coding and Code Golf constraints. Your execution time, memory usage, and keystrokes are tracked in a high-octane 1v1 or global format.</p>
+                
+                <!-- Glowing Node Visualization -->
+                <div class="heatmap">
+                    <div class="heatmap-node active"></div>
+                    <div class="heatmap-node"></div>
+                    <div class="heatmap-node active"></div>
+                    <div class="heatmap-node active"></div>
+                    <div class="heatmap-node"></div>
+                    <div class="heatmap-node active"></div>
+                    <div class="heatmap-node"></div>
+                    <div class="heatmap-node"></div>
+                    <div class="heatmap-node active"></div>
+                    <div class="heatmap-node active"></div>
+                    <div class="heatmap-node"></div>
+                    <div class="heatmap-node active"></div>
+                </div>
             </div>
+
+            <!-- Standard Cards -->
+            <div class="bento-card span-2">
+                <span class="bento-icon">⚡</span>
+                <h3>Sub-Millisecond Execution</h3>
+                <p>Powered by our custom Go + Docker micro-worker architecture. Say goodbye to pending queues.</p>
+            </div>
+
+            <div class="bento-card span-1">
+                <span class="bento-icon">🏆</span>
+                <h3>Global Rank</h3>
+                <p>Climb the ELO ladder. Earn badges for mastering Dynamic Programming, Graphs, and Math.</p>
+            </div>
+
+            <div class="bento-card span-1">
+                <span class="bento-icon">🧠</span>
+                <h3>Deep Analytics</h3>
+                <p>Analyze your space-time complexity with stunning animated visualizer charts.</p>
+            </div>
+
+            <!-- Full Width Banner -->
+            <div class="bento-card span-4" style="text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 60px;">
+                <h3 style="font-size: 36px; margin-bottom: 20px;">Ready to elevate your rank?</h3>
+                <a href="register.html" class="btn-magnetic" style="font-size: 18px; padding: 16px 32px;">Join the Elite</a>
+            </div>
+
         </div>
     </section>
 
-    <!-- Our Mission -->
-    <section class="mission-section section-padding">
-        <h2 class="section-title text-center scroll-reveal">Our Mission</h2>
-        
-        <div class="mission-grid">
-            <div class="mission-card tilt-card scroll-reveal">
-                <div class="icon-circle">🎯</div>
-                <h3>Algorithmic Mastery</h3>
-                <p>Provide a platform where students can test their logic and algorithmic thinking through rigorous custom contests.</p>
+    <!-- Horizontal Scroll Storytelling -->
+    <section class="timeline-wrapper">
+        <div class="timeline-container">
+            <div class="timeline-panel" style="background: rgba(0,240,255,0.05);">
+                <div style="max-width: 600px;">
+                    <h2 class="title-massive">Phase 1:<br><span class="gradient-text">The Setup</span></h2>
+                    <p style="font-size: 20px; color: var(--text-muted); margin-top: 20px;">We built this platform because generic editors weren't enough. We needed a place tailored specifically for the ICPC training regime.</p>
+                </div>
             </div>
-            
-            <div class="mission-card tilt-card scroll-reveal" style="transition-delay: 0.1s;">
-                <div class="icon-circle">🚀</div>
-                <h3>Foster Innovation</h3>
-                <p>Encourage out-of-the-box thinking via Reverse Coding and Code Golf challenges that push boundaries.</p>
+            <div class="timeline-panel" style="background: rgba(138,43,226,0.05);">
+                <div style="max-width: 600px;">
+                    <h2 class="title-massive">Phase 2:<br><span class="gradient-text">Execution</span></h2>
+                    <p style="font-size: 20px; color: var(--text-muted); margin-top: 20px;">A zero-latency, heavily sandboxed execution environment built in Golang. 100% secure, 100% scalable.</p>
+                </div>
             </div>
-            
-            <div class="mission-card tilt-card scroll-reveal" style="transition-delay: 0.2s;">
-                <div class="icon-circle">👥</div>
-                <h3>Build Community</h3>
-                <p>Create a vibrant competitive programming community that prepares students for the global ICPC regionals.</p>
-            </div>
-            
-            <div class="mission-card tilt-card scroll-reveal" style="transition-delay: 0.3s;">
-                <div class="icon-circle">📖</div>
-                <h3>Continuous Learning</h3>
-                <p>Promote upskilling in Data Structures and Algorithms with a custom execution engine built from scratch.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Events -->
-    <section id="events" class="events-section section-padding">
-        <h2 class="section-title text-center scroll-reveal">Events</h2>
-        <div class="events-container">
-            <div class="event-card scroll-reveal">
-                <div class="event-status upcoming">UPCOMING</div>
-                <h3>Reverse Coding Duel Vol. 3</h3>
-                <p>Figure out the hidden sequence and write the shortest code possible.</p>
-                <a href="arena.html" class="btn-primary" style="margin-top: 20px;">Enter Arena</a>
-            </div>
-
-            <div class="event-card scroll-reveal">
-                <div class="event-status past">PAST</div>
-                <h3>Freshers Code Golf</h3>
-                <p>The ultimate byte-saving challenge for the newest batch.</p>
-                <button class="btn-outline" disabled style="margin-top: 20px; opacity: 0.5;">Ended</button>
+            <div class="timeline-panel" style="background: rgba(255,255,255,0.02);">
+                <div style="max-width: 600px; text-align: center;">
+                    <h2 class="title-massive">Phase 3:<br><span class="gradient-text">Domination</span></h2>
+                    <a href="arena.html" class="btn-magnetic" style="margin-top: 30px; font-size: 20px;">Enter the Arena</a>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="main-footer scroll-reveal">
-        <div class="footer-grid">
-            <div class="footer-col">
-                <h3 class="footer-title">About</h3>
-                <p class="footer-text">Your gateway to competitive programming excellence at Amrita Vishwa Vidyapeetham. Never miss a contest, workshop, or learning experience.</p>
-            </div>
-            <div class="footer-col">
-                <h3 class="footer-title">Quick Links</h3>
-                <a href="#">Home</a>
-                <a href="#about">About Us</a>
-                <a href="#events">Events</a>
-                <a href="login.html">Sign In</a>
-            </div>
-            <div class="footer-col">
-                <h3 class="footer-title">Contact</h3>
-                <div class="contact-item">
-                    <span class="icon">✉</span>
-                    <a href="mailto:icpc@nagercoil.amrita.edu">icpc@nagercoil.amrita.edu</a>
-                </div>
-                <div class="contact-item">
-                    <span class="icon">📍</span>
-                    <span>Amrita Vishwa Vidyapeetham<br>Nagercoil, Tamil Nadu</span>
-                </div>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>© 2026 ICPC Amrita Nagercoil. All rights reserved.</p>
-            <div class="legal-links">
-                <a href="#">Privacy Policy</a>
-                <a href="#">Terms of Service</a>
-            </div>
+    <footer class="footer">
+        <div style="max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
+            <div class="nav-brand">AMRITA<span>/</span>ICPC</div>
+            <div style="color: var(--text-muted);">Crafted by Amrita Nagercoil Codebase. © 2026.</div>
         </div>
     </footer>
 
-    <!-- GSAP Libraries for Pro Animations -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    
+    <!-- Scripts -->
+    <script src="js/interactions.js"></script>
     <script src="js/animations.js"></script>
 </body>
 </html>
