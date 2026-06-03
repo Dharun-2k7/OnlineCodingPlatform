@@ -450,7 +450,6 @@ h1, h2, h3, h4, h5, h6, .display-font {
 
 /* 3. Transformation Engine (Horizontal Scroll) */
 .transform-wrapper {
-    overflow: hidden;
     position: relative;
     z-index: 2;
 }
@@ -462,13 +461,21 @@ h1, h2, h3, h4, h5, h6, .display-font {
 .transform-track {
     display: flex;
     gap: 24px;
-    padding: 0 40px 80px;
-    width: max-content;
+    padding: 0 40px 40px;
+    width: 100%;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+}
+.transform-track::-webkit-scrollbar {
+    display: none;
 }
 .transform-card {
     width: 360px;
     min-height: 320px;
     flex-shrink: 0;
+    scroll-snap-align: center;
     background: var(--card-bg);
     border: 1px solid var(--card-border);
     border-radius: 24px;
@@ -592,6 +599,16 @@ h1, h2, h3, h4, h5, h6, .display-font {
     font-weight: 500;
 }
 
+/* 7. Comparison Grid */
+.comparison-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+.comparison-pair {
+    display: contents;
+}
+
 /* Responsive Overrides for new elements */
 @media screen and (max-width: 768px) {
     .stats-grid { grid-template-columns: 1fr; }
@@ -603,6 +620,27 @@ h1, h2, h3, h4, h5, h6, .display-font {
     .transform-card { width: 300px; min-height: 280px; padding: 30px; }
     .transform-header { padding: 60px 20px 20px; }
     .transform-track { padding: 0 20px 60px; }
+    
+    .comparison-grid {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        padding-bottom: 20px;
+        -webkit-overflow-scrolling: touch;
+        gap: 16px;
+    }
+    .comparison-grid::-webkit-scrollbar {
+        display: none;
+    }
+    .comparison-pair {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        min-width: 85vw;
+        scroll-snap-align: center;
+        flex-shrink: 0;
+    }
+
     .community-section > div,
     .section-container > div[style*='grid-template-columns: 1fr 1fr'] { grid-template-columns: 1fr !important; }
 }

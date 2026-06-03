@@ -161,27 +161,20 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // D. Horizontal Scroll Transformation Engine
+    // D. Horizontal Scroll Transformation Engine (Native)
     const transformTrack = document.querySelector('.transform-track');
     if (transformTrack) {
         const evolutionFill = document.getElementById('evolutionFill');
         const evolutionLabel = document.getElementById('evolutionLabel');
         const totalCards = document.querySelectorAll('.transform-card').length;
 
-        gsap.to(transformTrack, {
-            x: () => -(transformTrack.scrollWidth - window.innerWidth) + "px",
-            ease: "none",
-            scrollTrigger: {
-                trigger: ".transform-wrapper",
-                pin: true,
-                scrub: 1,
-                end: () => "+=" + (transformTrack.scrollWidth - window.innerWidth),
-                invalidateOnRefresh: true,
-                onUpdate: (self) => {
-                    const stage = Math.min(Math.floor(self.progress * totalCards) + 1, totalCards);
-                    if (evolutionFill) evolutionFill.style.width = (stage / totalCards * 100) + '%';
-                    if (evolutionLabel) evolutionLabel.textContent = `Stage ${stage} / ${totalCards}`;
-                }
+        transformTrack.addEventListener('scroll', () => {
+            const maxScrollLeft = transformTrack.scrollWidth - transformTrack.clientWidth;
+            if (maxScrollLeft > 0) {
+                const scrollProgress = transformTrack.scrollLeft / maxScrollLeft;
+                const stage = Math.min(Math.floor(scrollProgress * (totalCards - 1)) + 1, totalCards);
+                if (evolutionFill) evolutionFill.style.width = (stage / totalCards * 100) + '%';
+                if (evolutionLabel) evolutionLabel.textContent = `Stage ${stage} / ${totalCards}`;
             }
         });
     }
