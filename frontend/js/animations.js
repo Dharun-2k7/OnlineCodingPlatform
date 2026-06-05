@@ -24,9 +24,9 @@ document.addEventListener('DOMContentLoaded', () => {
         // Actually, let's just fade up the whole title smoothly to avoid messing up HTML tags
         gsap.from(".hero-split", {
             opacity: 0,
-            y: 50,
-            rotateX: -45,
-            duration: 1.2,
+            y: 30,
+            rotateX: -30,
+            duration: 0.8,
             ease: "back.out(1.5)",
             transformOrigin: "50% 100%"
         });
@@ -36,16 +36,16 @@ document.addEventListener('DOMContentLoaded', () => {
     tl.from(".hero-subtitle", {
         opacity: 0,
         y: 20,
-        duration: 0.8,
-        ease: "power3.out"
-    }, "-=0.4")
+        duration: 0.5,
+        ease: "power2.out"
+    }, "-=0.2")
     .from(".hero-cta .btn-magnetic", {
         opacity: 0,
-        scale: 0.9,
+        scale: 0.95,
         stagger: 0.1,
-        duration: 0.6,
+        duration: 0.4,
         ease: "back.out(1.5)"
-    }, "-=0.6");
+    }, "-=0.3");
 
     // Floating Nodes Parallax based on mouse movement
     const pNodes = document.querySelectorAll('.p-node');
@@ -63,21 +63,21 @@ document.addEventListener('DOMContentLoaded', () => {
     // =========================================================================
     // 2. BENTO GRID ENTRANCE (Scale & Stagger)
     // =========================================================================
-    gsap.from(".bento-card", {
-        scrollTrigger: {
-            trigger: ".bento-grid",
-            start: "top 80%",
-            toggleActions: "play none none reverse"
-        },
-        y: 100,
-        opacity: 0,
-        scale: 0.9,
-        duration: 0.8,
-        stagger: {
-            amount: 0.3,
-            from: "random"
-        },
-        ease: "power3.out"
+    // Fix: Animate cards individually when they enter the viewport to eliminate lag
+    // and make them responsive on mobile devices.
+    gsap.utils.toArray(".bento-card, .stat-card, .timeline-panel").forEach(card => {
+        gsap.from(card, {
+            scrollTrigger: {
+                trigger: card,
+                start: "top 90%",
+                toggleActions: "play none none reverse"
+            },
+            y: 40,
+            opacity: 0,
+            scale: 0.95,
+            duration: 0.5,
+            ease: "power2.out"
+        });
     });
 
     // Heatmap staggered lighting
