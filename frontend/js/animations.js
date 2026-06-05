@@ -43,8 +43,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // =========================================================================
     // 2. VIEWPORT FADE-INS (Cards & Sections)
     // =========================================================================
-    // 1. Staggered Grid Reveals
-    gsap.utils.toArray(".bento-grid, .stats-grid, .values-grid, .comparison-grid").forEach(grid => {
+    // 1. Staggered Grid Reveals (General)
+    gsap.utils.toArray(".bento-grid:not(#transform-grid), .stats-grid, .values-grid").forEach(grid => {
         gsap.from(grid.children, {
             scrollTrigger: {
                 trigger: grid,
@@ -59,6 +59,48 @@ document.addEventListener('DOMContentLoaded', () => {
             ease: "power2.out"
         });
     });
+
+    // 1b. Transformation Engine (Left-to-Right Progression)
+    const transformGrid = document.getElementById('transform-grid');
+    if (transformGrid) {
+        gsap.from(transformGrid.children, {
+            scrollTrigger: {
+                trigger: transformGrid,
+                start: "top 80%",
+                toggleActions: "play none none reverse"
+            },
+            x: -40,
+            opacity: 0,
+            duration: 0.6,
+            stagger: 0.15,
+            ease: "power2.out"
+        });
+    }
+
+    // 1c. Why NicheCP Custom Storytelling
+    const comparisonPairs = gsap.utils.toArray(".comparison-grid .comparison-pair");
+    if (comparisonPairs.length >= 4) {
+        // Pair 1: Bottom Up
+        gsap.from(comparisonPairs[0], {
+            scrollTrigger: { trigger: comparisonPairs[0], start: "top 85%", toggleActions: "play none none reverse" },
+            y: 50, opacity: 0, duration: 0.6, ease: "power2.out"
+        });
+        // Pair 2: Slide from Left
+        gsap.from(comparisonPairs[1], {
+            scrollTrigger: { trigger: comparisonPairs[1], start: "top 85%", toggleActions: "play none none reverse" },
+            x: -50, opacity: 0, duration: 0.6, ease: "power2.out"
+        });
+        // Pair 3: Slide from Right
+        gsap.from(comparisonPairs[2], {
+            scrollTrigger: { trigger: comparisonPairs[2], start: "top 85%", toggleActions: "play none none reverse" },
+            x: 50, opacity: 0, duration: 0.6, ease: "power2.out"
+        });
+        // Pair 4: Bloom Scale
+        gsap.from(comparisonPairs[3], {
+            scrollTrigger: { trigger: comparisonPairs[3], start: "top 85%", toggleActions: "play none none reverse" },
+            scale: 0.9, opacity: 0, duration: 0.6, ease: "power2.out"
+        });
+    }
 
     // 2. Individual Text/Header Reveals
     gsap.utils.toArray(".section-container h2, .section-container > p, .vision-content p").forEach(el => {

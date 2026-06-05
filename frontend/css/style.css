@@ -147,35 +147,24 @@ h1, h2, h3, h4, h5, h6, .display-font {
 .theme-dot[data-set="aurora"] { background: #10b981; }
 .theme-dot[data-set="solar"] { background: #f97316; }
 
-.btn-magnetic {
+.btn-magnetic, .btn-primary {
     display: inline-block;
-    background: var(--primary-accent);
+    background: linear-gradient(135deg, var(--primary-accent), var(--secondary-accent), var(--primary-accent));
+    background-size: 200% auto;
     color: var(--btn-text);
     padding: 12px 24px;
     border-radius: 8px;
     font-weight: 600;
     text-decoration: none;
-    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), background-position 0.5s ease;
     position: relative;
     overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 240, 255, 0.1);
 }
-.btn-magnetic:hover {
-    transform: scale(1.03);
-    box-shadow: 0 10px 25px rgba(0, 240, 255, 0.25), 0 0 0 1px rgba(0, 240, 255, 0.5);
-}
-.btn-primary {
-    display: inline-block;
-    background: var(--primary-accent);
-    color: var(--btn-text);
-    padding: 12px 24px;
-    border-radius: 8px;
-    font-weight: 600;
-    text-decoration: none;
-    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s;
-}
-.btn-primary:hover {
-    transform: scale(1.03);
-    box-shadow: 0 10px 25px rgba(0, 240, 255, 0.25), 0 0 0 1px rgba(0, 240, 255, 0.5);
+.btn-magnetic:hover, .btn-primary:hover {
+    transform: scale(1.05);
+    background-position: right center;
+    box-shadow: 0 15px 30px rgba(0, 240, 255, 0.4), 0 0 0 1px rgba(0, 240, 255, 0.8);
 }
 .btn-ghost {
     background: transparent;
