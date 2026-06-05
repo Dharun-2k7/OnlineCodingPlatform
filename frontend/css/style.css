@@ -141,17 +141,65 @@ h1, h2, h3, h4, h5, h6, .display-font {
     border-radius: 8px;
     font-weight: 600;
     text-decoration: none;
-    transition: background 0.3s, box-shadow 0.3s;
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s;
     position: relative;
     overflow: hidden;
 }
 .btn-magnetic:hover {
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5), 0 0 40px var(--primary-accent);
+    transform: scale(1.03);
+    box-shadow: 0 10px 25px rgba(0, 240, 255, 0.25), 0 0 0 1px rgba(0, 240, 255, 0.5);
+}
+.btn-primary {
+    display: inline-block;
+    background: var(--primary-accent);
+    color: var(--btn-text);
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s;
+}
+.btn-primary:hover {
+    transform: scale(1.03);
+    box-shadow: 0 10px 25px rgba(0, 240, 255, 0.25), 0 0 0 1px rgba(0, 240, 255, 0.5);
 }
 .btn-ghost {
     background: transparent;
     color: var(--text-primary);
     border: 1px solid var(--card-border);
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s, background 0.2s;
+}
+.btn-ghost:hover {
+    transform: scale(1.03);
+    border-color: var(--primary-accent);
+    background: rgba(0, 240, 255, 0.05);
+}
+
+/* Animated Underline for Links */
+.nav-link {
+    position: relative;
+    color: var(--text-primary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: -4px;
+    left: 0;
+    background-color: var(--primary-accent);
+    transform-origin: center;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.nav-link:hover {
+    color: var(--primary-accent);
+}
+.nav-link:hover::after {
+    transform: scaleX(1);
 }
 
 /* ================== HERO SECTION ================== */
@@ -201,10 +249,12 @@ h1, h2, h3, h4, h5, h6, .display-font {
     /* 3D setup */
     transform-style: preserve-3d;
     will-change: transform, opacity;
-    transition: border-color 0.4s, background 0.4s;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s, box-shadow 0.3s, background 0.3s;
 }
 
 .bento-card:hover {
+    transform: translateY(-4px) scale(1.01);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
     border-color: var(--card-border-hover);
 }
 
@@ -306,10 +356,11 @@ h1, h2, h3, h4, h5, h6, .display-font {
     border-radius: 20px;
     padding: 40px;
     text-align: center;
-    transition: transform 0.3s, border-color 0.3s;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s, box-shadow 0.3s;
 }
 .stat-card:hover {
-    transform: translateY(-10px);
+    transform: translateY(-4px) scale(1.01);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
     border-color: var(--primary-accent);
 }
 .stat-number {

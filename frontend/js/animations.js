@@ -18,9 +18,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (heroTitle) {
         gsap.from(".hero-split", {
             opacity: 0,
-            y: 20,
-            duration: 0.8,
-            ease: "power2.out"
+            y: 30,
+            scale: 0.98,
+            duration: 1.0,
+            ease: "power3.out"
         });
     }
 
@@ -42,17 +43,34 @@ document.addEventListener('DOMContentLoaded', () => {
     // =========================================================================
     // 2. VIEWPORT FADE-INS (Cards & Sections)
     // =========================================================================
-    // Subtle, fast fade-ups to give a polished feel without complex math
-    gsap.utils.toArray(".bento-card:not(.phase-content), .stat-card, .timeline-panel, .transform-card").forEach(card => {
-        gsap.from(card, {
+    // 1. Staggered Grid Reveals
+    gsap.utils.toArray(".bento-grid, .stats-grid, .values-grid, .comparison-grid").forEach(grid => {
+        gsap.from(grid.children, {
             scrollTrigger: {
-                trigger: card,
+                trigger: grid,
+                start: "top 85%",
+                toggleActions: "play none none reverse"
+            },
+            y: 20,
+            scale: 0.98,
+            opacity: 0,
+            duration: 0.5,
+            stagger: 0.1,
+            ease: "power2.out"
+        });
+    });
+
+    // 2. Individual Text/Header Reveals
+    gsap.utils.toArray(".section-container h2, .section-container > p, .vision-content p").forEach(el => {
+        gsap.from(el, {
+            scrollTrigger: {
+                trigger: el,
                 start: "top 90%",
                 toggleActions: "play none none reverse"
             },
             y: 20,
             opacity: 0,
-            duration: 0.4,
+            duration: 0.6,
             ease: "power2.out"
         });
     });
