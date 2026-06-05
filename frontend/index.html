@@ -16,9 +16,7 @@
 </head>
 <body data-theme="quantum">
 
-    <!-- Background Effects -->
-    <div class="noise-bg"></div>
-    <div class="mesh-gradient"></div>
+
 
     <!-- Navigation -->
     <nav class="navbar">
@@ -39,21 +37,6 @@
 
     <!-- Hero Section -->
     <header class="hero">
-        <!-- Floating Parallax Nodes -->
-        <div class="parallax-nodes">
-            <!-- Node 1 -->
-            <svg class="p-node node-1" style="position:absolute; top:20%; left:15%; width:60px; opacity:0.5;" viewBox="0 0 100 100" fill="none" stroke="var(--primary-accent)" stroke-width="2">
-                <polygon points="50,5 95,25 95,75 50,95 5,75 5,25" />
-            </svg>
-            <!-- Node 2 -->
-            <svg class="p-node node-2" style="position:absolute; top:70%; left:10%; width:40px; opacity:0.3;" viewBox="0 0 100 100" fill="none" stroke="var(--secondary-accent)" stroke-width="4">
-                <circle cx="50" cy="50" r="45" />
-            </svg>
-            <!-- Node 3 -->
-            <svg class="p-node node-3" style="position:absolute; top:30%; right:15%; width:80px; opacity:0.6;" viewBox="0 0 100 100" fill="none" stroke="var(--primary-accent)" stroke-width="1">
-                <rect x="20" y="20" width="60" height="60" transform="rotate(45 50 50)" />
-            </svg>
-        </div>
 
         <h1 class="title-massive hero-split">
             Amrita Nagercoil<br>
@@ -284,25 +267,21 @@
     </section>
 
     <!-- ========================================== --><!-- Horizontal Scroll Storytelling -->
-    <section class="timeline-wrapper">
-        <div class="timeline-container">
-            <div class="timeline-panel" style="background: rgba(0,240,255,0.05);">
-                <div style="max-width: 600px;">
-                    <h2 class="title-massive">Phase 1:<br><span class="gradient-text">The Mission</span></h2>
-                    <p style="font-size: 20px; color: var(--text-muted); margin-top: 20px;">We built this platform for Amrita Nagercoil because generic editors weren't enough. We needed a dedicated home for our campus CP culture.</p>
-                </div>
+    <!-- Horizontal Scroll Storytelling (Refactored to Vertical) -->
+    <section class="section-container cv-auto">
+        <h2 class="display-font text-center" style="font-size: 48px; margin-bottom: 60px;">The <span class="gradient-text">Master Plan</span></h2>
+        <div class="bento-grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
+            <div class="bento-card">
+                <h2 class="title-massive" style="font-size: 32px;">Phase 1:<br><span class="gradient-text">The Mission</span></h2>
+                <p style="font-size: 16px; color: var(--text-muted); margin-top: 20px;">We built this platform for Amrita Nagercoil because generic editors weren't enough. We needed a dedicated home for our campus CP culture.</p>
             </div>
-            <div class="timeline-panel" style="background: rgba(138,43,226,0.05);">
-                <div style="max-width: 600px;">
-                    <h2 class="title-massive">Phase 2:<br><span class="gradient-text">The Community</span></h2>
-                    <p style="font-size: 20px; color: var(--text-muted); margin-top: 20px;">A platform where seniors mentor juniors, where internal contest rivals become ICPC teammates, and where the whole campus grows together.</p>
-                </div>
+            <div class="bento-card">
+                <h2 class="title-massive" style="font-size: 32px;">Phase 2:<br><span class="gradient-text">The Community</span></h2>
+                <p style="font-size: 16px; color: var(--text-muted); margin-top: 20px;">A platform where seniors mentor juniors, where internal contest rivals become ICPC teammates, and where the whole campus grows together.</p>
             </div>
-            <div class="timeline-panel" style="background: rgba(255,255,255,0.02);">
-                <div style="max-width: 600px; text-align: center;">
-                    <h2 class="title-massive">Phase 3:<br><span class="gradient-text">The Legacy</span></h2>
-                    <a href="arena.html" class="btn-magnetic" style="margin-top: 30px; font-size: 20px;">Join the Club</a>
-                </div>
+            <div class="bento-card">
+                <h2 class="title-massive" style="font-size: 32px;">Phase 3:<br><span class="gradient-text">The Legacy</span></h2>
+                <a href="arena.html" class="btn-primary" style="margin-top: 30px; font-size: 18px; display: inline-block;">Join the Club</a>
             </div>
         </div>
     </section>
@@ -341,24 +320,21 @@
     </section>
 
     <!-- Identity Transformation Engine (Horizontal Scroll) -->
-    <section class="transform-wrapper">
-        <div class="transform-header">
+    <!-- Identity Transformation Engine (Refactored to Vertical Grid) -->
+    <section class="section-container cv-auto">
+        <div class="transform-header" style="margin-bottom: 60px;">
             <h2 class="display-font text-center" style="font-size: 48px; margin-bottom: 10px;">The <span class="gradient-text">Transformation</span> Engine</h2>
-            <p class="text-center" style="color: var(--text-muted); margin-bottom: 20px;">Scroll to witness the evolution of an engineer.</p>
-            <div class="evolution-progress">
-                <div class="evolution-bar"><div class="evolution-fill" id="evolutionFill"></div></div>
-                <div class="evolution-label" id="evolutionLabel">Stage 1 / 8</div>
-            </div>
+            <p class="text-center" style="color: var(--text-muted);">The evolution of an engineer.</p>
         </div>
-        <div class="transform-track">
-            <div class="transform-card"><div class="slide-year">Stage 01</div><h3 class="display-font">Curious Beginner</h3><p>You know syntax but freeze at open-ended problems. The gap between "knowing a language" and "solving problems" feels infinite.</p><div class="tag-cloud"><span>Syntax</span><span>Loops</span><span>Conditionals</span></div></div>
-            <div class="transform-card"><div class="slide-year">Stage 02</div><h3 class="display-font">Pattern Explorer</h3><p>You start asking "why" instead of "what." Array problems share structures. Sorting is a strategy.</p><div class="tag-cloud"><span>Arrays</span><span>Strings</span><span>Sorting</span></div></div>
-            <div class="transform-card"><div class="slide-year">Stage 03</div><h3 class="display-font">Consistent Solver</h3><p>Daily practice becomes non-negotiable. Two pointers and binary search become instinct.</p><div class="tag-cloud"><span>Binary Search</span><span>Two Pointers</span><span>Hashing</span></div></div>
-            <div class="transform-card"><div class="slide-year">Stage 04</div><h3 class="display-font">Competitive Programmer</h3><p>You enter contests. The pressure of a ticking clock. Graphs, trees, and recursion are no longer abstract.</p><div class="tag-cloud"><span>Recursion</span><span>Trees</span><span>Graphs</span></div></div>
-            <div class="transform-card"><div class="slide-year">Stage 05</div><h3 class="display-font">Algorithmic Thinker</h3><p>You stop guessing. You decompose, identify constraints, and verify edge cases before writing code.</p><div class="tag-cloud"><span>DP</span><span>Greedy</span><span>Segment Trees</span></div></div>
-            <div class="transform-card"><div class="slide-year">Stage 06</div><h3 class="display-font">Systematic Engineer</h3><p>You walk into interviews with confidence. You communicate clearly and optimize on the fly.</p><div class="tag-cloud"><span>System Design</span><span>Optimization</span></div></div>
-            <div class="transform-card"><div class="slide-year">Stage 07</div><h3 class="display-font">Industry-Ready Builder</h3><p>Your discipline translates into production code. You write systems that scale and debug what others miss.</p><div class="tag-cloud"><span>Production Code</span><span>Scalability</span></div></div>
-            <div class="transform-card"><div class="slide-year">Stage 08</div><h3 class="display-font">Technical Leader</h3><p>You mentor others. You architect solutions. The thinking discipline defines your career.</p><div class="tag-cloud"><span>Architecture</span><span>Leadership</span></div></div>
+        <div class="bento-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px;">
+            <div class="bento-card"><div class="slide-year" style="font-family: 'Space Grotesk', sans-serif; color: var(--primary-accent); margin-bottom: 10px;">Stage 01</div><h3 class="display-font" style="font-size: 24px; margin-bottom: 15px;">Curious Beginner</h3><p style="color: var(--text-muted); margin-bottom: 20px;">You know syntax but freeze at open-ended problems.</p><div class="tag-cloud"><span>Syntax</span><span>Loops</span></div></div>
+            <div class="bento-card"><div class="slide-year" style="font-family: 'Space Grotesk', sans-serif; color: var(--primary-accent); margin-bottom: 10px;">Stage 02</div><h3 class="display-font" style="font-size: 24px; margin-bottom: 15px;">Pattern Explorer</h3><p style="color: var(--text-muted); margin-bottom: 20px;">You start asking "why" instead of "what."</p><div class="tag-cloud"><span>Arrays</span><span>Strings</span></div></div>
+            <div class="bento-card"><div class="slide-year" style="font-family: 'Space Grotesk', sans-serif; color: var(--primary-accent); margin-bottom: 10px;">Stage 03</div><h3 class="display-font" style="font-size: 24px; margin-bottom: 15px;">Consistent Solver</h3><p style="color: var(--text-muted); margin-bottom: 20px;">Daily practice becomes non-negotiable.</p><div class="tag-cloud"><span>Binary Search</span><span>Hashing</span></div></div>
+            <div class="bento-card"><div class="slide-year" style="font-family: 'Space Grotesk', sans-serif; color: var(--primary-accent); margin-bottom: 10px;">Stage 04</div><h3 class="display-font" style="font-size: 24px; margin-bottom: 15px;">Competitor</h3><p style="color: var(--text-muted); margin-bottom: 20px;">The pressure of a ticking clock.</p><div class="tag-cloud"><span>Recursion</span><span>Graphs</span></div></div>
+            <div class="bento-card"><div class="slide-year" style="font-family: 'Space Grotesk', sans-serif; color: var(--primary-accent); margin-bottom: 10px;">Stage 05</div><h3 class="display-font" style="font-size: 24px; margin-bottom: 15px;">Algorithmic Thinker</h3><p style="color: var(--text-muted); margin-bottom: 20px;">You decompose and identify constraints before coding.</p><div class="tag-cloud"><span>DP</span><span>Greedy</span></div></div>
+            <div class="bento-card"><div class="slide-year" style="font-family: 'Space Grotesk', sans-serif; color: var(--primary-accent); margin-bottom: 10px;">Stage 06</div><h3 class="display-font" style="font-size: 24px; margin-bottom: 15px;">Systematic Engineer</h3><p style="color: var(--text-muted); margin-bottom: 20px;">You optimize on the fly.</p><div class="tag-cloud"><span>System Design</span></div></div>
+            <div class="bento-card"><div class="slide-year" style="font-family: 'Space Grotesk', sans-serif; color: var(--primary-accent); margin-bottom: 10px;">Stage 07</div><h3 class="display-font" style="font-size: 24px; margin-bottom: 15px;">Industry Builder</h3><p style="color: var(--text-muted); margin-bottom: 20px;">You write systems that scale.</p><div class="tag-cloud"><span>Scalability</span></div></div>
+            <div class="bento-card"><div class="slide-year" style="font-family: 'Space Grotesk', sans-serif; color: var(--primary-accent); margin-bottom: 10px;">Stage 08</div><h3 class="display-font" style="font-size: 24px; margin-bottom: 15px;">Technical Leader</h3><p style="color: var(--text-muted); margin-bottom: 20px;">You architect solutions.</p><div class="tag-cloud"><span>Architecture</span></div></div>
         </div>
     </section>
 

@@ -93,51 +93,6 @@ h1, h2, h3, h4, h5, h6, .display-font {
 
 .text-center { text-align: center; }
 
-/* ================== CUSTOM CURSOR ================== */
-.custom-cursor {
-    position: fixed;
-    top: 0; left: 0;
-    width: 6px; height: 6px;
-    background: var(--primary-accent);
-    pointer-events: none;
-    z-index: 9999;
-    mix-blend-mode: difference;
-}
-
-.custom-cursor-follower {
-    position: fixed;
-    top: 0; left: 0;
-    width: 32px; height: 32px;
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    pointer-events: none;
-    z-index: 9998;
-}
-
-/* ================== BACKGROUND EFFECTS ================== */
-.noise-bg {
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)" opacity="0.05"/%3E%3C/svg%3E');
-    pointer-events: none;
-    z-index: 0;
-}
-
-.mesh-gradient {
-    position: fixed;
-    top: -50%; left: -50%; width: 200%; height: 200%;
-    background: radial-gradient(circle at 50% 50%, var(--primary-accent) 0%, transparent 40%),
-                radial-gradient(circle at 80% 20%, var(--secondary-accent) 0%, transparent 40%);
-    opacity: 0.1;
-    filter: blur(80px);
-    z-index: 0;
-    animation: rotateMesh 20s linear infinite;
-    pointer-events: none;
-}
-
-@keyframes rotateMesh {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
 
 /* ================== NAVIGATION & THEME SWITCHER ================== */
 .navbar {
@@ -145,9 +100,8 @@ h1, h2, h3, h4, h5, h6, .display-font {
     justify-content: space-between;
     align-items: center;
     padding: 20px 40px;
-    background: rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(255,255,255,0.05);
+    background: var(--bg-base);
+    border-bottom: 1px solid var(--card-border);
     position: fixed;
     width: 100%;
     top: 0; z-index: 100;
@@ -247,8 +201,6 @@ h1, h2, h3, h4, h5, h6, .display-font {
     border: 1px solid var(--card-border);
     border-radius: 24px;
     padding: 40px;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
     transform: translateZ(0); /* Force GPU composite layer */
     position: relative;
     overflow: hidden;
@@ -266,8 +218,7 @@ h1, h2, h3, h4, h5, h6, .display-font {
 .section-container .bento-card,
 .section-container .stat-card {
     background: linear-gradient(145deg, rgba(30, 25, 45, 0.7), rgba(15, 15, 20, 0.8));
-    border: 1px solid rgba(138, 43, 226, 0.25);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--card-border);
 }
 
 .section-container .bento-card:hover,
@@ -321,27 +272,6 @@ h1, h2, h3, h4, h5, h6, .display-font {
     box-shadow: 0 0 10px var(--primary-accent);
 }
 
-/* ================== HORIZONTAL SCROLL TIMELINE ================== */
-.timeline-wrapper {
-    overflow: hidden;
-    width: 100%;
-    min-height: 100vh;
-    position: relative;
-    contain: paint layout;
-}
-.timeline-container {
-    display: flex;
-    width: 300vw;
-    height: 100vh;
-}
-.timeline-panel {
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 40px;
-}
 
 /* ================== FOOTER ================== */
 .footer {
@@ -485,45 +415,7 @@ h1, h2, h3, h4, h5, h6, .display-font {
     max-width: 1400px;
     margin: 0 auto;
 }
-.transform-track {
-    display: flex;
-    gap: 24px;
-    padding: 0 40px 40px;
-    width: 100%;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    will-change: transform;
-}
-.transform-track.gsap-desktop-scroll {
-    overflow: visible !important;
-    scroll-snap-type: none !important;
-    flex-wrap: nowrap;
-}
-.transform-track.gsap-desktop-scroll .transform-card {
-    scroll-snap-align: none !important;
-}
-.transform-wrapper {
-    overflow: hidden;
-    width: 100%;
-    position: relative;
-    contain: paint layout;
-}
-.transform-track::-webkit-scrollbar {
-    display: none;
-}
-.transform-card {
-    width: 360px;
-    min-height: 320px;
-    flex-shrink: 0;
-    scroll-snap-align: center;
-    background: var(--card-bg);
-    border: 1px solid var(--card-border);
-    border-radius: 24px;
-    padding: 40px;
-    transition: border-color 0.4s;
-}
+
 .transform-card:hover {
     border-color: var(--card-border-hover);
 }
