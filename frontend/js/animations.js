@@ -32,7 +32,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    gsap.from(".hero-subtitle", {
+    const tl = gsap.timeline();
+    tl.from(".hero-subtitle", {
         opacity: 0,
         y: 20,
         duration: 0.8,
@@ -118,14 +119,18 @@ document.addEventListener('DOMContentLoaded', () => {
     // A. Number Counters (Why CP Matters)
     const counters = document.querySelectorAll('.counter');
     counters.forEach(counter => {
-        gsap.to(counter, {
-            innerHTML: counter.getAttribute('data-target'),
-            snap: { innerHTML: 1 },
+        const targetValue = parseInt(counter.getAttribute('data-target'), 10) || 0;
+        const obj = { val: 0 };
+        gsap.to(obj, {
+            val: targetValue,
             duration: 2,
             ease: "power2.out",
             scrollTrigger: {
                 trigger: counter,
                 start: "top 85%"
+            },
+            onUpdate: function() {
+                counter.innerHTML = Math.floor(obj.val);
             }
         });
     });
