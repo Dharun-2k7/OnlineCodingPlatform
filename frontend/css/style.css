@@ -318,6 +318,9 @@ h1, h2, h3, h4, h5, h6, .display-font {
 /* ================== HORIZONTAL SCROLL TIMELINE ================== */
 .timeline-wrapper {
     overflow: hidden;
+    width: 100%;
+    min-height: 100vh;
+    position: relative;
 }
 .timeline-container {
     display: flex;
@@ -496,6 +499,8 @@ h1, h2, h3, h4, h5, h6, .display-font {
 }
 .transform-wrapper {
     overflow: hidden;
+    width: 100%;
+    position: relative;
 }
 .transform-track::-webkit-scrollbar {
     display: none;
