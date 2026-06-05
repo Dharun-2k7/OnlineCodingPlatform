@@ -4,9 +4,14 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     initThemeSwitcher();
-    initCustomCursor();
-    initMagneticButtons();
-    init3DHoverPhysics();
+    
+    // Performance Optimization: Use GSAP matchMedia for memory-safe responsive teardown
+    let mm = gsap.matchMedia();
+    mm.add("(min-width: 769px)", () => {
+        initCustomCursor();
+        initMagneticButtons();
+        init3DHoverPhysics();
+    });
 });
 
 /* ================== 1. THEME SWITCHER ================== */
@@ -36,7 +41,6 @@ function initThemeSwitcher() {
 
 /* ================== 2. CUSTOM GSAP CURSOR ================== */
 function initCustomCursor() {
-    if (window.innerWidth <= 768) return; // Disable on mobile
 
     const cursor = document.createElement('div');
     cursor.className = 'custom-cursor';
@@ -79,7 +83,6 @@ function initCustomCursor() {
 
 /* ================== 3. MAGNETIC BUTTONS ================== */
 function initMagneticButtons() {
-    if (window.innerWidth <= 768) return;
 
     const magnets = document.querySelectorAll('.btn-magnetic');
     
@@ -105,11 +108,14 @@ function initMagneticButtons() {
 
 /* ================== 4. BENTO GRID 3D HOVER PHYSICS ================== */
 function init3DHoverPhysics() {
-    if (window.innerWidth <= 768) return;
-
     const cards = document.querySelectorAll('.bento-card');
+    gsap.set(cards, { transformPerspective: 1000 });
     
     cards.forEach(card => {
+        // Use quickTo for GPU-efficient direct updates
+        const xTo = gsap.quickTo(card, "rotateY", { duration: 0.4, ease: "power2.out" });
+        const yTo = gsap.quickTo(card, "rotateX", { duration: 0.4, ease: "power2.out" });
+        
         card.addEventListener('mousemove', (e) => {
             const rect = card.getBoundingClientRect();
             const x = e.clientX - rect.left;
@@ -122,16 +128,12 @@ function init3DHoverPhysics() {
             const rotateX = ((y - centerY) / centerY) * -10;
             const rotateY = ((x - centerX) / centerX) * 10;
             
-            gsap.to(card, {
-                rotateX: rotateX,
-                rotateY: rotateY,
-                duration: 0.5,
-                ease: "power2.out",
-                transformPerspective: 1000
-            });
+            xTo(rotateY);
+            yTo(rotateX);
         });
         
         card.addEventListener('mouseleave', () => {
+            // Restore original state
             gsap.to(card, {
                 rotateX: 0,
                 rotateY: 0,

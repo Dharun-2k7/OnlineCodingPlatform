@@ -242,7 +242,9 @@ h1, h2, h3, h4, h5, h6, .display-font {
     border: 1px solid var(--card-border);
     border-radius: 24px;
     padding: 40px;
-    backdrop-filter: blur(20px);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transform: translateZ(0); /* Force GPU composite layer */
     position: relative;
     overflow: hidden;
     /* 3D setup */
@@ -483,6 +485,18 @@ h1, h2, h3, h4, h5, h6, .display-font {
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
+    will-change: transform;
+}
+.transform-track.gsap-desktop-scroll {
+    overflow: visible !important;
+    scroll-snap-type: none !important;
+    flex-wrap: nowrap;
+}
+.transform-track.gsap-desktop-scroll .transform-card {
+    scroll-snap-align: none !important;
+}
+.transform-wrapper {
+    overflow: hidden;
 }
 .transform-track::-webkit-scrollbar {
     display: none;
