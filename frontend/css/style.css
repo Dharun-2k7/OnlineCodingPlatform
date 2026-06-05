@@ -57,6 +57,12 @@ body {
     transition: background-color 0.5s ease;
 }
 
+/* GPU & DOM Optimizations */
+.cv-auto {
+    content-visibility: auto;
+    contain-intrinsic-size: 1000px;
+}
+
 /* Custom Scrollbar */
 ::-webkit-scrollbar { width: 8px; }
 ::-webkit-scrollbar-track { background: var(--bg-base); }
@@ -321,6 +327,7 @@ h1, h2, h3, h4, h5, h6, .display-font {
     width: 100%;
     min-height: 100vh;
     position: relative;
+    contain: paint layout;
 }
 .timeline-container {
     display: flex;
@@ -501,6 +508,7 @@ h1, h2, h3, h4, h5, h6, .display-font {
     overflow: hidden;
     width: 100%;
     position: relative;
+    contain: paint layout;
 }
 .transform-track::-webkit-scrollbar {
     display: none;

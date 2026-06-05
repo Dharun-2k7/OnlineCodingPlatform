@@ -122,7 +122,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     scrub: 1,
                     end: () => "+=" + (timelineContainer.scrollWidth - window.innerWidth),
                     invalidateOnRefresh: true,
-                    fastScrollEnd: true
+                    fastScrollEnd: true,
+                    pinType: "transform"
                 }
             });
         });
@@ -201,6 +202,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     end: () => "+=" + (transformTrack.scrollWidth - window.innerWidth),
                     invalidateOnRefresh: true,
                     fastScrollEnd: true,
+                    pinType: "transform",
                     onUpdate: (self) => {
                         const progress = self.progress;
                         const stage = Math.min(Math.floor(progress * (totalCards - 1)) + 1, totalCards);
