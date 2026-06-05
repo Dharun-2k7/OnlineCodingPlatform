@@ -47,7 +47,8 @@ function initCustomCursor() {
     document.body.appendChild(cursor);
     document.body.appendChild(follower);
     
-    gsap.set(cursor, { xPercent: -50, yPercent: -50 });
+    gsap.set(cursor, { xPercent: -50, yPercent: -50, rotation: 45 });
+    gsap.set(follower, { xPercent: -50, yPercent: -50, rotation: 45 });
     
     // Use GSAP QuickTo for maximum performance (60 FPS)
     const xTo = gsap.quickTo(cursor, "x", {duration: 0.1, ease: "power3"});
@@ -66,12 +67,12 @@ function initCustomCursor() {
     const interactives = document.querySelectorAll('a, button, .bento-card, .theme-dot');
     interactives.forEach(el => {
         el.addEventListener('mouseenter', () => {
-            gsap.to(cursor, { scale: 1.5, duration: 0.2 });
-            gsap.to(follower, { scale: 1.5, borderColor: 'var(--primary-accent)', duration: 0.2 });
+            gsap.to(cursor, { scale: 1.5, duration: 0.3 });
+            gsap.to(follower, { scale: 1.2, rotation: 135, borderColor: 'var(--primary-accent)', duration: 0.4, ease: "back.out(1.5)" });
         });
         el.addEventListener('mouseleave', () => {
-            gsap.to(cursor, { scale: 1, duration: 0.2 });
-            gsap.to(follower, { scale: 1, borderColor: 'rgba(255,255,255,0.4)', duration: 0.2 });
+            gsap.to(cursor, { scale: 1, duration: 0.3 });
+            gsap.to(follower, { scale: 1, rotation: 45, borderColor: 'rgba(255,255,255,0.4)', duration: 0.4, ease: "back.out(1.5)" });
         });
     });
 }
